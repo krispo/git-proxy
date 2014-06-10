@@ -5,7 +5,7 @@ require 'bundler/setup'
 
 Bundler.require(:default)  
 
-require File.expand_path('../hello', __FILE__)
+require File.expand_path('../git-proxy', __FILE__)
 
 # Set environment vars, only for development mode.
 # For production mode run 'deploy.sh' script manually
