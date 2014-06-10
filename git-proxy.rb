@@ -1,11 +1,9 @@
 require 'sinatra'
-require 'rest-client'
-require 'json'
 
 module Git
   class Proxy < Sinatra::Base
     get '/' do
-      '!!! test rest !!!'
+      '!!! test without rest !!!'
     end
   end
 end
