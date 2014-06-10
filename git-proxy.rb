@@ -1,13 +1,20 @@
 require 'sinatra'
 require 'rest-client'
 require 'json'
+require 'haml'
 
 module Git
   class Proxy < Sinatra::Base
     
+    # configuration
+    configure :production, :development do
+      enable :logging
+      set :views, "#{File.dirname(__FILE__)}"
+    end
+    
     # test base url
     get '/' do
-      '!!! test rest !!!'
+      haml :index
     end
 
     #
@@ -23,7 +30,7 @@ module Git
     #
     # return: json
     #   +: {"access_token": ..., "token_type": ..., "scope": ...}
-    #   -: {"error": ..., ...}
+    #   -: {"error": ..., "error_description": ..., "error_uri": ...}
     #
     get '/github_access_token' do  
       
@@ -45,7 +52,7 @@ module Git
         end
       end
 
-      puts "Fetching authentication request from client_name: #{client_name}, client_id: #{client_id} ..."      
+      logger.info "Fetching authentication request from client_name: #{client_name}, client_id: #{client_id} ..."      
       
       # POST the code back to GitHub to get token
       result = RestClient.post('https://github.com/login/oauth/access_token',
@@ -59,6 +66,16 @@ module Git
 
       # return result with access_token, scope and token_type
       result      
+    end
+
+    # NotFound
+    not_found do
+      'This is nowhere to be found.'
+    end
+
+    # Error
+    error do
+      'Sorry there was a nasty error - ' + env['sinatra.error'].name
     end
   end
 end

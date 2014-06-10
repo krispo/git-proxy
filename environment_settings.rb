@@ -15,8 +15,8 @@ def load_env
       ENV['APPLICATION_ENV'] = application_env
     else			
       # for production on heroku
-      application_env = config["production"].to_json    	
-      puts `heroku config:set APPLICATION_ENV=#{application_env}`
+      application_env = config["production"].to_json
+      puts `heroku config:set APPLICATION_ENV='#{application_env}'`
     end
   end	
 end
