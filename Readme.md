@@ -1,7 +1,7 @@
 Git-Proxy
 =========
 
-It is used as a cloud bridge between your web application and Github, especially if you want to get access to [Github API](https://developer.github.com/v3/) completely inside the browser, without any backend-side in your application. For example, if you want to deeply communicate with Github from your Github Pages. 
+It is used as a cloud bridge between your web application and Github, especially if you want to get access to [Github API](https://developer.github.com/v3/) completely inside the browser, without any backend-side in your application. For example, if you want to deeply communicate with Github API from your Github Pages. 
 
 In this case Github API have some [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 limitations and we encounter with a lot of difficulties to provide multi-step [OAuth](https://developer.github.com/v3/oauth/) process. The problem is described in detail in this [great post](http://blog.vjeux.com/2012/javascript/github-oauth-login-browser-side.html).
@@ -54,7 +54,7 @@ Git-proxy uses Heroku as a primary cloud service without additional adjustments.
 ```
 $heroku apps:create your-git-proxy
 ```
-If you make some changes in the repo, you should add it to github and then deploy your project to Heroku:
+If you make some changes in the repo, you can add it to github and then deploy your project to Heroku:
 ```
 $git push heroku master
 ```
@@ -84,7 +84,7 @@ RESPONSE:
 
 ## Register Application
 
-To register the web application you should go to your `Account settings` -> `Application` tab -> click `Register new application` button. 
+To register the web application you should go to your `Account settings` -> `Application` tab -> click `Register new application` button -> and fill the form with right URLs. 
 
 After that Github will generate `client_id` and `client_secret` for your app.
 
