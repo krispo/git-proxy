@@ -1,6 +1,15 @@
 Git-Proxy
 =========
 
+It is used as a cloud bridge between your web application and Github, especially if you want to get access to [Github API](https://developer.github.com/v3/) completely inside the browser, without any backend-side in your application. For example, if you want to deeply communicate with Github from your Github Pages. 
+
+In this case Github API have some [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+limitations and we encounter with a lot of difficulties to provide multi-step [OAuth](https://developer.github.com/v3/oauth/) process. The problem is described in detail in this [great post](http://blog.vjeux.com/2012/javascript/github-oauth-login-browser-side.html).
+
+Using a lightweight proxy server we can avoid all this troubles and also we can safely store all our sensitive data. 
+
+> Actually, you should install the proxy **only once**, and then use it for all your web applications that you want to provide a simple access to Github API. The only thing to do is to add the application sensitive data to server environmental variable. And server will know about the application.
+
 ##Install and configure
 
 To use it as your own proxy you should fork this repo. Then clone it locally and configure:
@@ -9,7 +18,7 @@ $git clone https://github.com/<your_name>/git-proxy.git
 $cd git-proxy
 $touch application.json
 ```
-In the created `application.json` file you should add credentials for your github applications. A common view of `application.json` file is
+In the created `application.json` file you should add credentials for your applications. A common view of `application.json` file is
 ```json
 //application.json
 {
@@ -64,7 +73,7 @@ $bash update.sh
 
 ##Usage
 
-After git-proxy will run successfully, your github applications can get github authentication token via following request 
+After git-proxy will run successfully, your applications can get github authentication token via following request 
 ```
 REQUEST:
     GET http://your-git-proxy.herokuapp.com/github_access_token?client_id=<client_id>&code=<session_code>
@@ -72,6 +81,12 @@ REQUEST:
 RESPONSE:
     {"access_token": <access_token>, "token_type": <token_type>, "scope": <scope>}
 ```
+
+## Register Application
+
+To register the web application you should go to your `Account settings` -> `Application` tab -> click `Register new application` button. 
+
+After that Github will generate `client_id` and `client_secret` for your app.
 
 ---
 [MIT License](https://github.com/krispo/git-proxy/blob/master/LICENSE)
